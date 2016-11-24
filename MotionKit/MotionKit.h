@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double MotionKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char MotionKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MotionKit/PublicHeader.h>
-
-
