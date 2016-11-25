@@ -169,7 +169,9 @@ import CoreMotion
         
         if manager.isDeviceMotionAvailable{
             manager.deviceMotionUpdateInterval = interval
-            manager.startDeviceMotionUpdates(to: OperationQueue()){
+            manager.showsDeviceMovementDisplay = true
+
+            manager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: OperationQueue()) {
                 (data, error) in
                 
                 if let isError = error{
@@ -330,9 +332,11 @@ import CoreMotion
         var valAccuracy: Int32!
         if manager.isDeviceMotionAvailable{
             manager.deviceMotionUpdateInterval = interval
-            manager.startDeviceMotionUpdates(to: OperationQueue()){
-                 (data, error) in
-                
+            manager.showsDeviceMovementDisplay = true
+
+            manager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: OperationQueue()) {
+                (data, error) in
+
                 if let isError = error{
                     print("Error: \(isError)")
                 }
@@ -340,11 +344,11 @@ import CoreMotion
                 valY = data!.magneticField.field.y
                 valZ = data!.magneticField.field.z
                 valAccuracy = data!.magneticField.accuracy.rawValue
-                
+
                 if values != nil{
                     values!(valX, valY, valZ, valAccuracy)
                 }
-                
+
                 self.delegate?.getMagneticFieldFromDeviceMotion!(valX, y: valY, z: valZ)
             }
             
